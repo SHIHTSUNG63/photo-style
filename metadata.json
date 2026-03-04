@@ -1,0 +1,5 @@
+{
+  "name": "照片變換風格",
+  "description": "Transform your photos into any artistic style using Gemini 2.5 Flash Image.",
+  "requestFramePermissions": []
+}
