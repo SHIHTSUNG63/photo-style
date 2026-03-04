@@ -28,20 +28,20 @@
 
 ## 📦 部署
 
-本專案已設定 GitHub Actions 自動化部署到 GitHub Pages。
+本專案已設定 GitHub Actions 自動化部署到 GitHub Pages。**部署時會直接使用 GitHub Secrets，不需要上傳任何 `.env` 檔案。**
 
 ### 設定步驟
 
 1. **GitHub Secrets 設定**：
    - 前往 GitHub 倉庫的 **Settings > Secrets and variables > Actions**。
-   - 新增兩個 Repository secrets：
+   - **必須**新增以下兩個 Repository secrets：
      - `GEMINI_API_KEY`: 填入你的 Gemini API 金鑰。
      - `APP_URL`: 填入部署後的 URL（例如 `https://<username>.github.io/photo-style/`）。
 2. **啟用 GitHub Pages**：
    - 前往 **Settings > Pages**。
    - 在 **Build and deployment > Source** 選擇 `GitHub Actions`。
-3. **手動部署（可選）**：
-   - 前往 **Actions** 頁籤，選擇 `Deploy to GitHub Pages` 工作流並點擊 `Run workflow`。
+3. **自動部署**：
+   - 只要將變更推送到 `main` 分支，系統就會自動觸發 `Deploy to GitHub Pages` 工作流進行編譯與發布。
 
 ## 🛠 專案架構
 
