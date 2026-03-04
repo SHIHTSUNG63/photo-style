@@ -126,17 +126,21 @@ export default function App() {
       return;
     }
 
+    const modelsToTry = ["gemini-2.0-flash", "gemini-1.5-flash"];
+    let currentModelIndex = 0;
+    let foundImage = false;
     
     while (currentModelIndex < modelsToTry.length && !foundImage) {
       try {
-        const model = "gemini-2.5-flash-image";
+        const model = modelsToTry[currentModelIndex];
         const ai = new GoogleGenAI({ apiKey });
 
         // Extract base64 data
         const base64Data = originalImage.split(',')[1];
         const mimeType = originalImage.split(';')[0].split(':')[1];
 
-        const response = await ai.models.generateContent({
+        // Use the original library's pattern
+        const response = await (ai as any).models.generateContent({
           model: model,
           contents: {
             parts: [
@@ -154,6 +158,7 @@ export default function App() {
         });
 
         const candidates = response.candidates;
+        
         if (candidates && candidates.length > 0) {
           for (const part of candidates[0].content.parts) {
             if (part.inlineData) {
@@ -166,11 +171,6 @@ export default function App() {
         }
 
         if (!foundImage) {
-          // If we tried all models and still no image
-          if (currentModelIndex === modelsToTry.length - 1) {
-            throw new Error("模型未生成影像結果。請換一個風格試試。");
-          }
-          // Otherwise continue to next model
           currentModelIndex++;
         }
 
